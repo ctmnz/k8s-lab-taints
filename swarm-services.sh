@@ -1,4 +1,6 @@
-number_of_pods=100
+number_of_pods=50
+number_of_replicas=6
+
 for a in $(seq 1 $number_of_pods)
 do
 cat >services/service-$a.yaml <<EOF
@@ -15,7 +17,7 @@ metadata:
   labels:
     app: busybox-sleep-${a}
 spec:
-  replicas: 3
+  replicas: ${number_of_replicas}
   selector:
     matchLabels:
       app: busybox-sleep-${a}
