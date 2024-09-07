@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: deployments-ns-63
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox-sleep-63-deployment
+  namespace: deployments-ns-63
+  labels:
+    app: busybox-sleep-63
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: busybox-sleep-63
+  template:
+    metadata:
+      labels:
+        app: busybox-sleep-63
+    spec:    
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+          - containerPort: 80
+            name: http-web-svc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: busybox-sleep-63-service
+  namespace: deployments-ns-63
+spec:
+  selector:
+    app: busybox-sleep-63
+  ports:
+  - name: name-of-service-port
+    protocol: TCP
+    port: 80
+    targetPort: http-web-svc

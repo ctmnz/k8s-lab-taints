@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pod-ns-14
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-sleep-14
+  namespace: pod-ns-14
+spec:
+  containers:
+  - name: busybox
+    image: busybox:1.28
+    args:
+    - sleep
+    - "1000000"
